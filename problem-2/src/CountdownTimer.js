@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './CountdownTimer.css';
 
 const CountdownTimer = () => {
   const [hours, setHours] = useState(0);
@@ -8,7 +9,7 @@ const CountdownTimer = () => {
   const [timerActive, setTimerActive] = useState(false);
 
   useEffect(() => {
-    setTotalSeconds(hours * 3600 + minutes * 60 + seconds*1);
+    setTotalSeconds(hours * 3600 + minutes * 60 + seconds * 1);
   }, [hours, minutes, seconds]);
 
   useEffect(() => {
@@ -42,42 +43,50 @@ const CountdownTimer = () => {
   const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
   return (
-    <div>
-      <div>
-        <label>
-          Hours:
+    <div className="timer">
+      <div className='timerInput'>
+        <div id='timerForm'>
+          
           <input
             type="number"
-            value={hours}
+            min="0"
+            size="1"
+            placeholder="h"
+            value={hours || ''}
             onChange={(e) => setHours(e.target.value)}
           />
-        </label>
-        <label>
-          Minutes:
+        
+          :
           <input
             type="number"
-            value={minutes}
+            min="0"
+            size="1"
+            placeholder="m"
+            value={minutes || ''}
             onChange={(e) => setMinutes(e.target.value)}
           />
-        </label>
-        <label>
-          Seconds:
+        
+          :
           <input
             type="number"
-            value={seconds}
+            min="0"
+            size="1"
+            placeholder="s"
+            value={seconds || ''}
             onChange={(e) => setSeconds(e.target.value)}
           />
-        </label>
+
+          <button onClick={startTimer}>START COUNTDOWN</button>
+        </div>
       </div>
       <div>
-        <p>
+        <p id='counter'>
           {formatTime(Math.floor(totalSeconds / 3600))}:
           {formatTime(Math.floor((totalSeconds % 3600) / 60))}:
           {formatTime(totalSeconds % 60)}
         </p>
       </div>
-      <div>
-        <button onClick={startTimer}>Start</button>
+      <div className='counterButtons'>
         <button onClick={stopTimer}>Stop</button>
         <button onClick={resetTimer}>Reset</button>
       </div>

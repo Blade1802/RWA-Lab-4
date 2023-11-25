@@ -1,0 +1,68 @@
+.timer {
+    margin: auto;
+    height: 100%;
+    color: #666;
+    font-size: 35px;
+}
+
+.timerInput {
+    background-color: #dddddd;
+    width: 300px;
+    height: 150px;
+    margin: auto;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    color: #666;
+    margin: 0px 7px;
+    width: 1.5em;
+    text-align: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-size: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+button {
+    display: block;
+    margin: auto;
+    font-weight: bold;
+    font-size: 13px;
+    width: 95%;
+    margin-top: 20px;
+    letter-spacing: 1px;
+    outline: 0;
+    border: 0;
+    border-radius: 4px;
+    color: #666;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    padding: 8px 10px;
+    font-family: "Lato", sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#counter {
+    font-size: 105px;
+    line-height: 0.8em;
+    margin: 30px;
+}
+
+.counterButtons {
+    width: fit-content;
+    margin: auto;
+    min-width: 15%;
+}
