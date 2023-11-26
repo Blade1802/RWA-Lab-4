@@ -37,8 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const noteColor = note.style.backgroundColor;
 
             editNoteText.value = noteText;
-            // editColorSelector.value = noteColor; // Set the edit color selector to the note's color
-            editColorSelector.value = "#00ff00"; // Hardcoded, to be fixed by converting rgb value to hex
+            editColorSelector.value = rgbToHex(noteColor); // Set the edit color selector to the note's color
 
             editModal.style.display = "block";
         });
@@ -50,6 +49,21 @@ document.addEventListener("DOMContentLoaded", function () {
         note.appendChild(editButton);
 
         notesList.appendChild(note);
+    }
+
+    // Helper function to convert rgb value to hex
+    function rgbToHex(rgb) {
+        // Extracting the individual RGB values
+        const rgbArray = rgb.match(/\d+/g).map(Number);
+
+        // Converting each RGB component to hexadecimal
+        const hexArray = rgbArray.map((component) => {
+            const hex = component.toString(16);
+            return hex.length === 1 ? "0" + hex : hex;
+        });
+
+        // Joining the hexadecimal components and returning the result
+        return "#" + hexArray.join("");
     }
 
     // RxJS Observable for adding a note
