@@ -31,6 +31,16 @@ input {
     background: rgba(255, 255, 255, 0.7);
 }
 
+::placeholder {
+    color: #bbb;
+    opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder {
+    /* Edge 12-18 */
+    color: #bbb;
+}
+
 button {
     display: block;
     margin: auto;
@@ -51,8 +61,8 @@ button {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #counter {

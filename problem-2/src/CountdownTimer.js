@@ -7,11 +7,14 @@ const CountdownTimer = () => {
   const [seconds, setSeconds] = useState(0);
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
+  const [timerExpired, setTimerExpired] = useState(false);
 
+  // Calculate total time on the timer
   useEffect(() => {
     setTotalSeconds(hours * 3600 + minutes * 60 + seconds * 1);
   }, [hours, minutes, seconds]);
 
+  // Set interval to decrement time every second
   useEffect(() => {
     let interval;
 
@@ -25,8 +28,17 @@ const CountdownTimer = () => {
     return () => clearInterval(interval);
   }, [timerActive, totalSeconds]);
 
+  useEffect(() => {
+    // When timer reaches 0 and timer was active (to prevent message to be show on page load)
+    if (totalSeconds === 0 && timerActive) {
+      setTimerActive(false);
+      setTimerExpired(true);
+    }
+  }, [totalSeconds, timerActive]);
+
   const startTimer = () => {
     setTimerActive(true);
+    setTimerExpired(false);
   };
 
   const stopTimer = () => {
@@ -35,12 +47,21 @@ const CountdownTimer = () => {
 
   const resetTimer = () => {
     setTimerActive(false);
+    setTimerExpired(false);
     setHours(0);
     setMinutes(0);
     setSeconds(0);
   };
 
+  // Format time to 2 digits
   const formatTime = (time) => (time < 10 ? `0${time}` : time);
+
+  // Timer expired message
+  const TimerExpiredMessage = () => (
+    <div style={{ color: 'red', fontSize: '18px', marginTop: '10px' }}>
+      Time's up! Your timer has expired.
+    </div>
+  );
 
   return (
     <div className="timer">
@@ -85,6 +106,7 @@ const CountdownTimer = () => {
           {formatTime(Math.floor((totalSeconds % 3600) / 60))}:
           {formatTime(totalSeconds % 60)}
         </p>
+        {timerExpired && <TimerExpiredMessage />}
       </div>
       <div className='counterButtons'>
         <button onClick={stopTimer}>Stop</button>
